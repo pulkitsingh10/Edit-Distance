@@ -83,45 +83,52 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" width={"50px"} />
-      </header>
-      <div className="container">
-        <p>Enter the string:</p>
-        <div className="inputBox">
-          <div
-            className="box"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <input
-              type="text"
-              placeholder={"Input string : "}
-              onChange={(e) => setWord(e.target.value)}
-            ></input>
-            <IconButton onClick={handleSearch}>
-              <SearchIcon />
-            </IconButton>
+    <>
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" width={"50px"} />
+        </header>
+        <div className="container">
+          <p>Enter the string:</p>
+          <div className="inputBox">
+            <div
+              className="box"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <input
+                type="text"
+                placeholder={"Input string : "}
+                onChange={(e) => setWord(e.target.value)}
+              ></input>
+              <IconButton onClick={handleSearch}>
+                <SearchIcon />
+              </IconButton>
+            </div>
+          </div>
+          <div className="bodyResults">
+            {loading ? (
+              <LoadSkeleton></LoadSkeleton>
+            ) : (
+              finalList.map((w, idx) => {
+                console.log("from map :", w);
+                return (
+                  <DisplayRow
+                    key={idx}
+                    dist={w.dist}
+                    word={w.word}
+                  ></DisplayRow>
+                );
+              })
+            )}
           </div>
         </div>
-        <div className="bodyResults">
-          {loading ? (
-            <LoadSkeleton></LoadSkeleton>
-          ) : (
-            finalList.map((w, idx) => {
-              console.log("from map :", w);
-              return (
-                <DisplayRow key={idx} dist={w.dist} word={w.word}></DisplayRow>
-              );
-            })
-          )}
-        </div>
       </div>
-    </div>
+      <h6 hidden>learn react</h6>
+    </>
   );
 }
 
